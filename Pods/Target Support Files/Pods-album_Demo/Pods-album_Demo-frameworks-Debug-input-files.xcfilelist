@@ -1,5 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-album_Demo/Pods-album_Demo-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
-${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework
 ${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework
-${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework
