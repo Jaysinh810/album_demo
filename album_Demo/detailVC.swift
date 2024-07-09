@@ -18,9 +18,11 @@ class detailVC: UIViewController {
     @IBOutlet weak var favouriteBtn: UIImageView!
     
     var userid: Int?
+    var detailid: Int?
     var userTitle: String?
     var userImg: String?
-    var favImg: String?
+    var favFlag: Bool?
+    var userArr = [userModel]()
     
     
     //MARK: ------------------------- VIEWDIDLOAD -------------------------
@@ -37,6 +39,9 @@ class detailVC: UIViewController {
         self.titleLbl.text = "Title : \(self.userTitle ?? "")"
         self.titleLbl.numberOfLines = 0
         
+        self.favouriteBtn.image = self.favFlag ?? false ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
+        
+        print("==> Detail ID", self.detailid)
         self.favouriteBtn.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
         self.favouriteBtn.addGestureRecognizer(tapGestureRecognizer)

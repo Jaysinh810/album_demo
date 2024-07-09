@@ -60,7 +60,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
         let index = sender.view?.tag
-        print("==> index", index!)
+        print("==> starred index", index!)
         modelUserData[index ?? 0].isFavourite.toggle()
         print("==> flag", modelUserData[index!].isFavourite)
 //        print(modelUserData)
@@ -176,12 +176,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = self.albumTable.dequeueReusableCell(withIdentifier: "albumTableViewCell") as! albumTableViewCell
         cell.selectionStyle = .none
-        let userdata = modelUserData[indexPath.row]
         
         let vc = storyboard?.instantiateViewController(withIdentifier: "detailVC") as! detailVC
-        vc.userid = userdata.userId
-        vc.userTitle = userdata.title
+        
+        if favFlag == true {
+            let userdata = filterFavouriteData[indexPath.row]
+            vc.userid = userdata.userId
+            vc.userTitle = userdata.title
 //        vc.userImg = cell.userImgView.image
+            vc.favFlag = userdata.isFavourite
+            vc.detailid = userdata.id
+        } else {
+            let userdata = modelUserData[indexPath.row]
+            vc.userid = userdata.userId
+            vc.userTitle = userdata.title
+//        vc.userImg = cell.userImgView.image
+            vc.favFlag = userdata.isFavourite
+            vc.detailid = userdata.id
+        }
+        
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
