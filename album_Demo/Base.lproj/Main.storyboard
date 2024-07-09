@@ -64,13 +64,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wlx-Id-ACX">
                                                             <rect key="frame" x="95" y="47.333333333333343" width="198" height="50.666666666666657"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User ID : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Soh-RY-9WD">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="User ID : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Soh-RY-9WD">
                                                                     <rect key="frame" x="0.0" y="0.0" width="198" height="20.333333333333332"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1e9-Bq-CK2">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Title : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1e9-Bq-CK2">
                                                                     <rect key="frame" x="0.0" y="30.333333333333336" width="198" height="20.333333333333336"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -105,6 +105,12 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO DATA TO DISPLAY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Def-Yj-p0h">
+                                        <rect key="frame" x="70.000000000000014" y="59.999999999999993" width="253.33333333333337" height="28.666666666666664"/>
+                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -113,9 +119,11 @@
                                     <constraint firstAttribute="trailing" secondItem="hc6-Gg-ZHb" secondAttribute="trailing" id="B4u-eb-vXf"/>
                                     <constraint firstItem="5j1-Yv-TUV" firstAttribute="top" secondItem="hc6-Gg-ZHb" secondAttribute="bottom" id="JQm-K0-47E"/>
                                     <constraint firstAttribute="trailing" secondItem="5j1-Yv-TUV" secondAttribute="trailing" id="Km5-dt-gjA"/>
+                                    <constraint firstItem="Def-Yj-p0h" firstAttribute="top" secondItem="abe-hK-Hk5" secondAttribute="top" constant="60" id="NWi-D9-69g"/>
                                     <constraint firstItem="LHP-Yg-HTz" firstAttribute="leading" secondItem="abe-hK-Hk5" secondAttribute="leading" id="O10-08-NJn"/>
                                     <constraint firstAttribute="trailing" secondItem="LHP-Yg-HTz" secondAttribute="trailing" id="bhT-JW-51C"/>
                                     <constraint firstItem="hc6-Gg-ZHb" firstAttribute="top" secondItem="LHP-Yg-HTz" secondAttribute="bottom" id="e6w-eq-0lS"/>
+                                    <constraint firstItem="Def-Yj-p0h" firstAttribute="centerX" secondItem="abe-hK-Hk5" secondAttribute="centerX" id="g0Y-qv-ssR"/>
                                     <constraint firstItem="hc6-Gg-ZHb" firstAttribute="leading" secondItem="abe-hK-Hk5" secondAttribute="leading" id="mxM-FC-JxM"/>
                                     <constraint firstItem="5j1-Yv-TUV" firstAttribute="leading" secondItem="abe-hK-Hk5" secondAttribute="leading" id="pqL-8y-aJ0"/>
                                 </constraints>
@@ -135,6 +143,7 @@
                         <outlet property="albumSearch" destination="LHP-Yg-HTz" id="3kf-AV-JdY"/>
                         <outlet property="albumSegment" destination="5j1-Yv-TUV" id="nnH-SG-GF9"/>
                         <outlet property="albumTable" destination="hc6-Gg-ZHb" id="OoS-QR-poh"/>
+                        <outlet property="nodataLbl" destination="Def-Yj-p0h" id="2jr-3c-umK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

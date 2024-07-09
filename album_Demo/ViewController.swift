@@ -18,14 +18,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var albumSearch: UISearchBar!
     
+    @IBOutlet weak var nodataLbl: UILabel!
     @IBOutlet weak var albumTable: UITableView!
     
     @IBOutlet weak var albumSegment: UISegmentedControl!
     
     var modelUserData = [userModel]()
     var filterFavouriteData = [userModel]()
+    var filterSearchData = [userModel]()
     var favFlag: Bool = false
-    
+    var searchFlag: Bool = false
     
     
     //MARK: ------------------------- VIEWDIDLOAD -------------------------
@@ -36,6 +38,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.albumTable.delegate = self
         self.albumTable.dataSource = self
+        self.albumSearch.delegate = self
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped(_:)))
+        self.view.addGestureRecognizer(tapGestureRecognizer)
+        
         
         self.getapicall()
     }
@@ -47,9 +54,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         switch self.albumSegment.selectedSegmentIndex {
         case 0:
             self.favFlag = false
+            self.albumSearch.isHidden = false
+            self.nodataLbl.isHidden = true
             self.albumTable.reloadData()
         case 1:
             self.favFlag = true
+            self.albumSearch.isHidden = true
             self.onSelectFavouriteSegment()
             self.albumTable.reloadData()
         default:
@@ -70,6 +80,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
 //        self.albumTable.reloadRows(at: [IndexPath(row: index ?? 0, section: 0)], with: .automatic)
         
+    }
+    
+    @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
+        self.albumSearch.resignFirstResponder()
     }
     
     //MARK: ------------------------- FUNCTIONS -------------------------
@@ -132,7 +146,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.favFlag == true {
+            if self.filterFavouriteData.count == 0 {
+                self.nodataLbl.isHidden = false
+                return self.filterFavouriteData.count
+            }
+            self.nodataLbl.isHidden = true
             return self.filterFavouriteData.count
+        }
+        if self.searchFlag == true {
+            return self.filterSearchData.count
         }
         return self.modelUserData.count
     }
@@ -156,6 +178,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.favouriteBtn.tag = (userdata.id ?? 0) - 1
 
         } else {
+            if searchFlag == true {
+                let userdata = filterSearchData[indexPath.row]
+                cell.useridLbl.text = "User ID : \(userdata.userId ?? 0)"
+                cell.titleLbl.text = "Title : \(userdata.title ?? "")"
+                cell.favouriteBtn.image = userdata.isFavourite ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
+                cell.favouriteBtn.tag = (userdata.id ?? 0) - 1
+                cell.userImgView.image = UIImage(systemName: "person.circle")
+                
+                return cell
+            }
             let userdata = modelUserData[indexPath.row]
             cell.useridLbl.text = "User ID : \(userdata.userId ?? 0)"
             cell.titleLbl.text = "Title : \(userdata.title ?? "")"
@@ -187,6 +219,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             vc.favFlag = userdata.isFavourite
             vc.detailid = userdata.id
         } else {
+            if searchFlag == true {
+                let userdata = filterSearchData[indexPath.row]
+                vc.userid = userdata.userId
+                vc.userTitle = userdata.title
+    //        vc.userImg = cell.userImgView.image
+                vc.favFlag = userdata.isFavourite
+                vc.detailid = userdata.id
+            }
             let userdata = modelUserData[indexPath.row]
             vc.userid = userdata.userId
             vc.userTitle = userdata.title
@@ -201,15 +241,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //SEARCH DELEGATES
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if let searchTxt = searchBar.text {
-            
+        if searchText.isEmpty {
+            self.filterSearchData = self.modelUserData
         }
+        else {
+            self.filterSearchData = self.modelUserData.filter({$0.title!.lowercased().contains(searchText.lowercased())})
+            print(filterSearchData)
+            self.searchFlag = true
+        }
+        self.albumTable.reloadData()
     }
     
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        <#code#>
-//    }
-//    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.filterSearchData = self.modelUserData
+        self.searchFlag = false
+        self.albumTable.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.albumSearch.resignFirstResponder()
+    }
+    
 //    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
 //        <#code#>
 //    }

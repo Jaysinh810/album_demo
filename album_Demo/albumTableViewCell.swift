@@ -16,16 +16,6 @@ class albumTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var favouriteBtn: UIImageView!
     
-//    var favButtonPressed : (() -> ()) = {}
-//    
-//    var isFavorite: Bool = false {
-//        didSet {
-//            let imageName = isFavorite ? "heart.fill" : "heart"
-//            self.favouriteBtn.image = UIImage(systemName: imageName)
-//        }
-//    }
-//    
-//    var favoriteAction: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,13 +25,6 @@ class albumTableViewCell: UITableViewCell {
         self.userImgView.clipsToBounds = true
         
         
-            
-        
-        
-        
-        
-        
-
         
         self.titleLbl.numberOfLines = 1
         self.titleLbl.lineBreakMode = .byTruncatingTail
