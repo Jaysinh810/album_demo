@@ -17,6 +17,8 @@ struct userModel : Codable {
 	let id : Int?
 	let title : String?
 	let completed : Bool?
+    var isFavourite : Bool = false
+    
 
 	enum CodingKeys: String, CodingKey {
 
@@ -24,6 +26,7 @@ struct userModel : Codable {
 		case id = "id"
 		case title = "title"
 		case completed = "completed"
+        case isFavourite = "isFavourite"
 	}
 
 	init(from decoder: Decoder) throws {
@@ -32,6 +35,7 @@ struct userModel : Codable {
 		id = try values.decodeIfPresent(Int.self, forKey: .id)
 		title = try values.decodeIfPresent(String.self, forKey: .title)
 		completed = try values.decodeIfPresent(Bool.self, forKey: .completed)
+//        isFavourite = try values.decodeIfPresent(Bool.self, forKey: .isFavourite)
 	}
 
 }

@@ -16,14 +16,16 @@ class albumTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var favouriteBtn: UIImageView!
     
-    var isFavorite: Bool = false {
-        didSet {
-            let imageName = isFavorite ? "heart.fill" : "heart"
-            self.favouriteBtn.image = UIImage(systemName: imageName)
-        }
-    }
-    
-    var favoriteAction: (() -> Void)?
+//    var favButtonPressed : (() -> ()) = {}
+//    
+//    var isFavorite: Bool = false {
+//        didSet {
+//            let imageName = isFavorite ? "heart.fill" : "heart"
+//            self.favouriteBtn.image = UIImage(systemName: imageName)
+//        }
+//    }
+//    
+//    var favoriteAction: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,9 +40,7 @@ class albumTableViewCell: UITableViewCell {
         
         
         
-        self.favouriteBtn.isUserInteractionEnabled = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
-        self.favouriteBtn.addGestureRecognizer(tapGestureRecognizer)
+        
 
         
         self.titleLbl.numberOfLines = 1
@@ -54,17 +54,15 @@ class albumTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
-        if self.favouriteBtn.image == UIImage(systemName: "star") {
-            self.favouriteBtn.image = UIImage(systemName: "star.fill")
-        } else {
-            self.favouriteBtn.image = UIImage(systemName: "star")
-        }
-    }
-    
-    @IBAction func favoriteButtonTapped(_ sender: UIButton) {
-            favoriteAction?()
-        }
+//    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
+//        self.favButtonPressed()
+//        
+//        if self.favouriteBtn.image == UIImage(systemName: "star") {
+//            self.favouriteBtn.image = UIImage(systemName: "star.fill")
+//        } else {
+//            self.favouriteBtn.image = UIImage(systemName: "star")
+//        }
+//    }
     
     
 
